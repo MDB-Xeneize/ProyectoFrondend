@@ -196,6 +196,12 @@ export class RegistroInOutClass extends Component {
                 <th>
                     Capacidad Maxima
                 </th>
+                <th>
+                    Gestion
+                </th>
+                <th>
+                    Accion
+                </th>
             </tr>
         
             <tr>
@@ -205,6 +211,8 @@ export class RegistroInOutClass extends Component {
             <td>{registro.modelo}</td>
             <td>{registro.tara}</td>
             <td>{registro.carga_maxima}</td>
+            <td>{registro.nickname}</td>
+            <td>{registro.gestiona}</td>
           </tr>
            </> 
      

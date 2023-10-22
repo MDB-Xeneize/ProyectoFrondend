@@ -114,6 +114,7 @@ export class AgregarUsuarioClass extends Component {
             rol: this.state.rol,
             permisos: this.state.permisos,
             id_usuario: this.state.id_usuario
+            
         }
         //Es Modificar o Agregar?
         let parametros = null;

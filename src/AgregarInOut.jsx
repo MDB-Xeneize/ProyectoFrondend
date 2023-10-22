@@ -168,7 +168,7 @@ debugger
             id_chofer:this.state.id_chofer,
             id_vehiculo:this.state.id_vehiculo,
             nombre:this.state.nombre,
-            id_usuario:sessionStorage.getItem('id_usuario')
+            nickname:sessionStorage.getItem('nickname')
         }
         //paso el registro.id_tipo por si hay que actualizar o null si hay que crear en tabla tipo_viaje y viaje
         registro.id_tipo= this.props.registro.extra!==undefined ? this.props.registro.registro.id_tipo :null;
