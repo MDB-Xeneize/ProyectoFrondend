@@ -29,33 +29,30 @@ class BarraNavClass extends React.Component {
 
     render(){
     return (
-        <div className="container">
+        <div className="container barranav">
             <div className='row'>
 
                 <div className='col-8 abs-center'>
-                    <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
+                    <nav className="navbar navbar-expand-lg navbar-light bg-transparent ">
                         <div className="container-fluid">
-                            <a className="navbar-brand" href="http://localhost:3000/"><i>Inicio</i></a>
+                        {this.state.token !== "" && this.state.token !== null ? (null):(<a className="navbar-brand textoNav" href="http://localhost:3000/"><i>Inicio</i></a>) }                     
                             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                                 <span className="navbar-toggler-icon"></span>
                             </button>
                             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div className="navbar-nav">
-                                    <a className="nav-link active" aria-current="page" href="http://localhost:3000/Login">Login</a>
-                                    {this.state.token !== "" && this.state.token !== null ? (<a className="nav-link" href="http://localhost:3000/Menu"><i>Menú</i></a>):(null) }
-                
-                                    
-                                    <a className="nav-link" href="http://localhost:3000/Contactos"><i>Contactos</i></a>
-
-                                    {this.state.token !== "" && this.state.token !== null? (<a className="nav-link" href="http://localhost:3000/UsuarioAgregar" tabIndex="-1" aria-disabled="true"><i>Registrar Usuarios</i></a>):(null) }
-                                    {this.state.token !== "" && this.state.token !== null ? (<button className="nav-link"  onClick={this.handleClickSalir } tabIndex="-1" aria-disabled="true"><i>Salir</i></button>):(null) } 
+                                    {this.state.token !== "" && this.state.token !== null ? (null):(<a className="nav-link active textoNav" aria-current="page" href="http://localhost:3000/Login"><i>Login</i></a>) }
+                                    {this.state.token !== "" && this.state.token !== null ? (<a className="nav-link textoNav" href="http://localhost:3000/Menu"><i>Menú</i></a>):(null) }
+                                    {this.state.token !== "" && this.state.token !== null ? (null):(<a className="nav-link textoNav" href="http://localhost:3000/Contactos"><i>Contactos</i></a>) }
+                                    {this.state.token !== "" && this.state.token !== null? (<a className="nav-link textoNav" href="http://localhost:3000/UsuarioAgregar" tabIndex="-1" aria-disabled="true"><i>Registrar Usuarios</i></a>):(null) }
+                                    {this.state.token !== "" && this.state.token !== null ? (<button className="nav-link textoNav"  onClick={this.handleClickSalir } tabIndex="-1" aria-disabled="true"><i>Salir</i></button>):(null) } 
                                 </div>
                             </div>
                         </div>
                     </nav>
                 </div>
                 <div col-2>
-                    {this.state.token !== "" && this.state.token !== null ? (<p className="nav-link" ><i>{`Usuario:${sessionStorage.getItem('email')} Rol:${sessionStorage.getItem('rol')}`} </i></p>):(null) }
+                    {this.state.token !== "" && this.state.token !== null ? (<p className="nav-link textoRell" ><i>{`Usuario:${sessionStorage.getItem('email')} Rol:${sessionStorage.getItem('rol')}`} </i></p>):(null) }
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import ImageCard from '../imageCard';
 import BarraNav from '../nav';
 
+
 import thumbRegistroInOut from '../images/thumbRegistroInOutX.png'
 import thumbRegistroVehiculos from '../images/thumbRegistroCamion.png'
 import thumbRegistroConductores from '../images/thumbRegistroChofer.png'
@@ -17,6 +18,10 @@ import imagenCardRegistroConductor from '../images/RegistroChofer.png'
 import imagenCardRegistroUsuario from '../images/registrousuarios.png'
 import imagenCardRegistroMantenimiento from '../images/registromantenimiento.png'
 
+import iconoAgregar from '../images/iconoAgregar.png'
+import iconoModificar from '../images/iconoModificar.png'
+import iconoEliminar from '../images/iconoEliminar.png'
+import iconoListar from '../images/iconoListar.png'
 
 class DemoCarousel extends Component {
 
@@ -37,7 +42,7 @@ class DemoCarousel extends Component {
   }
 
   handleMouseOver(index) {
-    console.log('ok')// Cambia el estado para indicar que el mouse está sobre el thumb en el índice especificado.
+    // Cambia el estado para indicar que el mouse está sobre el thumb en el índice especificado.
     //this.setState({ hoveredThumbIndex: index });
   }
 
@@ -73,65 +78,35 @@ class DemoCarousel extends Component {
 
 
   render() {
-    debugger
+  
     const options1 =  objetoOpciones('InOut');
-    // {
-    //   'Listar': 'http://localhost:3000/InOut/',
-    //   'Agregar': "http://localhost:3000/InOutAgregar/",
-    //   'Modificar': "http://localhost:3000/InOutModificar",
-    //   'Eliminar': "http://localhost:3000/InOutBorrar"
-    // }
+
     const options2 = objetoOpciones('Vehiculo');
-    // {
-    //   'Listar': 'http://localhost:3000/Vehiculo',
-    //   'Agregar': "http://localhost:3000/VehiculoAgregar",
-    //   'Modificar': "http://localhost:3000/VehiculoModificar",
-    //   'Eliminar': "http://localhost:3000/VehiculoBorrar"
-    // }
-
+ 
     const options3 = objetoOpciones('Chofer');
-    // const options3 = {
-    //   'Listar': 'http://localhost:3000/Chofer',
-    //   'Agregar': "http://localhost:3000/ChoferAgregar",
-    //   'Modificar': "http://localhost:3000/ChoferModificar",
-    //   'Eliminar': "http://localhost:3000/ChoferBorrar"
-    // }
-    const options4 = objetoOpciones('Service');
-    //  {
-    //   'listar': 'http://localhost:3000/Service',
-    //   'Agregar': "http://localhost:3000/ServiceAgregar",
-    //   'Modificar': "http://localhost:3000/ServiceModificar",
-    //   'Eliminar': "http://localhost:3000/ServiceBorrar"
-    // }
 
-    // const options5 = {
-    //   'Listar': 'http://localhost:3000/Usuario',
-    //   'Agregar': "http://localhost:3000/UsuarioAgregar",
-    //   'Modificar': "http://localhost:3000/UsuarioModificar",
-    //   'Eliminar': "http://localhost:3000/UsuarioBorrar"
-    // }
-    debugger
-    //const permisos=sessionStorage.getItem('permisos')
+    const options4 = objetoOpciones('Service');
+
     const options5 = objetoOpciones('Usuario');
 
     function objetoOpciones(tabla){
     if (sessionStorage.getItem('permisos') === '1') {
       return {
-        'Listar': `http://localhost:3000/${tabla}Modificar`,
+        'Listar': {url:`http://localhost:3000/${tabla}`,icono:iconoListar},
       };
     } else if (sessionStorage.getItem('permisos') === '2') {
      return {
-        'Listar': `http://localhost:3000/${tabla}`,
-        'Agregar': `http://localhost:3000/${tabla}Agregar`,
-        'Modificar': `http://localhost:3000/${tabla}Modificar`,
+        'Listar': {url:`http://localhost:3000/${tabla}`,icono:iconoListar},
+        'Agregar': {url:`http://localhost:3000/${tabla}Agregar `,icono:iconoAgregar},
+        'Modificar': {url:`http://localhost:3000/${tabla}Modificar`,icono:iconoModificar},
         
       };
     } else if (sessionStorage.getItem('permisos') === '3') {
       return  {
-        'Listar': `http://localhost:3000/${tabla}`,
-        'Agregar': `http://localhost:3000/${tabla}Agregar`,
-        'Modificar': `http://localhost:3000/${tabla}Modificar`,
-        'Eliminar': `http://localhost:3000/${tabla}Borrar`,
+        'Listar': {url:`http://localhost:3000/${tabla}`,icono:iconoListar},
+        'Agregar': {url:`http://localhost:3000/${tabla}Agregar `,icono:iconoAgregar},
+        'Modificar': {url:`http://localhost:3000/${tabla}Modificar`,icono:iconoModificar},
+        'Eliminar': {url:`http://localhost:3000/${tabla}Borrar`,icono:iconoEliminar},
       };
     } else {
       return  null; // Otra condición si es necesario
@@ -143,7 +118,6 @@ class DemoCarousel extends Component {
       < >
 
         <BarraNav />
-
           <Carousel renderThumbs={this.renderThumbs}>
             <div className='col'>
               <ImageCard 

@@ -1,5 +1,5 @@
 body {
-  background:linear-gradient(320deg,white 2%,rgb(99, 99, 223) 40%,blue) ;
+  background:linear-gradient(0deg,white 2%,rgb(99, 99, 223) 40%,blue 80%,white ) ;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -8,6 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
 }
 
 html{
@@ -56,3 +57,37 @@ min-height: 100%;
 .thumbero{
   box-shadow: 10px 10px 5px black;
 }
+
+.textoNav{
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size:x-large;
+  font-weight: 700;
+  color:navajowhite;
+}
+
+.textoRell{
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size:medium;
+  font-weight: 300;
+  color:navajowhite;
+} 
+
+ .iconos{
+  min-width: 2vw;
+  min-height: 2vw;
+  max-width: 2vw;
+  max-height: 2vw;
+  padding: auto;
+}
+
+/* .barranav{ */
+  /* position:fixed; */
+/* } */
+
+/* .top{ */
+  /* margin: 1px;
+  width: 100%;
+  height: 100%;
+  padding-top: 30%; */
+
+/* } */

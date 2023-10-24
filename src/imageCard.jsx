@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { Icons } from 'react-toastify';
 
 
 
@@ -22,17 +23,33 @@ class ImageCard extends Component {
 
   render() {
     debugger
-    const { imagen, titulo, options , alt } = this.props;
-    const listItems = Object.entries(options).map(([text, link]) => (
-    <a href={link} className="list-group-item list-group-item-action ">
-      <i >
-        {text} 
-       
-      </i>
-    </a>
+    const { imagen, titulo, options, alt } = this.props;
+    const listItems = Object.entries(options).map(([text, value]) => (
+      <div className='container'>
+        <div className='row'>
+          <div className='col'>
+            <a href={value.url} className="list-group-item list-group-item-action card-body">
+              <i >
+                {text}
+
+              </i>
+
+            </a>
+
+          </div>
+
+          <div className='col-1'>
+            <img src={value.icono} className="iconos" alt='icono' />
+          </div>
+
+        </div>
+
+      </div>
+
+
     ));
-    
-   return (
+
+    return (
 
 
       <div className="container">
@@ -60,8 +77,8 @@ class ImageCard extends Component {
           <div className='col-4'>
 
             <ul class="list-group" >
-              
-            { listItems }
+
+              {listItems}
 
             </ul>
           </div>
