@@ -24,6 +24,8 @@ class ImageCard extends Component {
   render() {
     debugger
     const { imagen, titulo, options, alt } = this.props;
+   
+
     const listItems = Object.entries(options).map(([text, value]) => (
       <div className='container'>
         <div className='row'>
@@ -39,7 +41,7 @@ class ImageCard extends Component {
           </div>
 
           <div className='col-1'>
-            <img src={value.icono} className="iconos" alt='icono' />
+            <a href={value.url} ><img src={value.icono} className="iconos" alt='icono' /></a>
           </div>
 
         </div>

@@ -33,6 +33,7 @@ export class RegistroUsuarioClass extends Component {
 
     componentDidMount() {
         debugger
+        
         let parametros = {
             method: 'GET',
             headers: {
@@ -40,7 +41,7 @@ export class RegistroUsuarioClass extends Component {
                 'authorization': sessionStorage.getItem('token')
             }
         }
-
+        sessionStorage.setItem('modifyMyUser', false)
         const url = "http://localhost:8080/api/usuario";
         fetch(url,parametros)
             .then(res => {
@@ -90,7 +91,7 @@ export class RegistroUsuarioClass extends Component {
                             <td>{registro.id_usuario}</td>
                             <td>{registro.nickname}</td>
                             <td>{registro.email}</td> 
-                            <td>{registro.password}</td> 
+                            {/* <td>{registro.password}</td>  */}
                             <td>{registro.rol}</td>                   
                             <td>{registro.permisos}</td>
                             <td>
@@ -113,45 +114,98 @@ export class RegistroUsuarioClass extends Component {
             }
         }
         else{
-            return(
-                <>
-                    <tr key={index}  >
-                        <td>{registro.id_usuario}</td>
-                        <td>{registro.nickname}</td>
-                        <td>{registro.email}</td>                    
-                        <td>{registro.password}</td>
-                        <td>{registro.rol}</td>
-                        <td>{registro.permisos}</td>
-                        <td>
-                            {(this.props.borrar===undefined||this.state.seleccion!=='')?null: 
-                                    <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"onClick={() => this.handleClickSwitch(registro)}/>
-                                    <label className="form-check-label" for="flexSwitchCheckDefault"></label>
-                                    </div>
-
-                            }
-                            {(this.props.extra==='True')?
-                            (<Link to='' className='btn btn-warning' onClick={() => this.handleClickModificar(registro)}>
-                                <span class="material-symbols-outlined">Modificar</span>
-                            </Link>):null
-                            }
-                            {(this.props.borrar===true&&this.state.seleccion===registro.id_usuario)?
-                            (<Link to='' className='btn btn-danger' onClick={() => this.handleClickBorrar(registro)}>
-                                <span className="material-symbols-outlined">Eliminar</span>
-                            </Link>):null
-                            }
-                               {(this.props.borrar===true&&this.state.seleccion===registro.id_usuario)?
-                            (<Link to='' className='btn btn-success' onClick={() => this.handleClickSwitch(registro)}>
-                                <span className="material-symbols-outlined">Cancelar</span>
-                            </Link>):null
-                            }
+            if(sessionStorage.getItem('permisos') === '3'){
+                return(
+                    <>
+                        <tr key={index}  >
+                            <td>{registro.id_usuario}</td>
+                            <td>{registro.nickname}</td>
+                            <td>{registro.email}</td>                    
+                            {/* {sessionStorage.getItem('permisos') === '3' ? <td>{registro.password}</td>:null} */}
+                            <td>{registro.rol}</td>
+                            {sessionStorage.getItem('permisos') === '3' ? <td>{registro.permisos}</td>:null}
                             
-                        </td>
-                        <td>                                                
-                        </td>
-                    </tr>                
-                </>
-            )
+                            <td>
+                                {(this.props.borrar===undefined||this.state.seleccion!=='')?null: 
+                                        <div className="form-check form-switch">
+                                        <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"onClick={() => this.handleClickSwitch(registro)}/>
+                                        <label className="form-check-label" for="flexSwitchCheckDefault"></label>
+                                        </div>
+    
+                                }
+                                {(this.props.extra==='True')?
+                                (<Link to='' className='btn btn-warning' onClick={() => this.handleClickModificar(registro)}>
+                                    <span class="material-symbols-outlined">Modificar</span>
+                                </Link>):null
+                                }
+                                {(this.props.borrar===true&&this.state.seleccion===registro.id_usuario)?
+                                (<Link to='' className='btn btn-danger' onClick={() => this.handleClickBorrar(registro)}>
+                                    <span className="material-symbols-outlined">Eliminar</span>
+                                </Link>):null
+                                }
+                                   {(this.props.borrar===true&&this.state.seleccion===registro.id_usuario)?
+                                (<Link to='' className='btn btn-success' onClick={() => this.handleClickSwitch(registro)}>
+                                    <span className="material-symbols-outlined">Cancelar</span>
+                                </Link>):null
+                                }
+                                
+                            </td>
+                            <td>                                                
+                            </td>
+                        </tr>                
+                    </>
+                )
+            }
+            else{
+                if(sessionStorage.getItem('nickname') === registro.nickname ){
+                    sessionStorage.setItem('modifyMyUser', true)
+                    // const modifyMyUser=true;
+                    return(
+                        <>
+                            <tr key={index}  >
+                                <td>{registro.id_usuario}</td>
+                                <td>{registro.nickname}</td>
+                                <td>{registro.email}</td>                    
+                                {/* {sessionStorage.getItem('permisos') === '3' ? <td>{registro.password}</td>:null} */}
+                                {/* <td>{registro.password}</td> */}
+                                <td>{registro.rol}</td>
+                                <td>{registro.permisos}</td>
+                                {/* {sessionStorage.getItem('permisos') === '3' ? <td>{registro.permisos}</td>:null} */}
+                                
+                                <td>
+                                    {(this.props.borrar===undefined||this.state.seleccion!=='')?null: 
+                                            <div className="form-check form-switch">
+                                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"onClick={() => this.handleClickSwitch(registro)}/>
+                                            <label className="form-check-label" for="flexSwitchCheckDefault"></label>
+                                            </div>
+        
+                                    }
+                                    {(this.props.extra==='True')?
+                                    (<Link to='' className='btn btn-warning' onClick={() => this.handleClickModificar(registro)}>
+                                        <span class="material-symbols-outlined">Modificar</span>
+                                    </Link>):null
+                                    }
+                                    {(this.props.borrar===true&&this.state.seleccion===registro.id_usuario)?
+                                    (<Link to='' className='btn btn-danger' onClick={() => this.handleClickBorrar(registro)}>
+                                        <span className="material-symbols-outlined">Eliminar</span>
+                                    </Link>):null
+                                    }
+                                       {(this.props.borrar===true&&this.state.seleccion===registro.id_usuario)?
+                                    (<Link to='' className='btn btn-success' onClick={() => this.handleClickSwitch(registro)}>
+                                        <span className="material-symbols-outlined">Cancelar</span>
+                                    </Link>):null
+                                    }
+                                    
+                                </td>
+                                <td>                                                
+                                </td>
+                            </tr>                
+                        </>
+                    )
+
+                }
+            }
+            
         }
     }
  
@@ -286,15 +340,17 @@ export class RegistroUsuarioClass extends Component {
                                         <th>
                                             Email
                                         </th>
-                                        <th>
+                                        {/* {sessionStorage.getItem('permisos') === '3' || sessionStorage.getItem('modifyMyUser')==='true' ?     <th>
                                             Password
-                                        </th>
+                                        </th>:null} */}
+                                      
                                         <th>
                                             Rol
                                         </th>
-                                        <th>
+                                        {sessionStorage.getItem('permisos') === '3'|| sessionStorage.getItem('modifyMyUser')==='true' ?   <th>
                                             Permiso
-                                        </th>
+                                        </th>:null}
+                                      
                                         
                                     </tr>
                                 </thead>

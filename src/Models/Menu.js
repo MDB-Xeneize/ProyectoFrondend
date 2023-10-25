@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import ImageCard from '../imageCard';
 import BarraNav from '../nav';
+import SeparateWays from '../AgregarSeparate';
 
 
 import thumbRegistroInOut from '../images/thumbRegistroInOutX.png'
@@ -88,6 +89,11 @@ class DemoCarousel extends Component {
     const options4 = objetoOpciones('Service');
 
     const options5 = objetoOpciones('Usuario');
+    sessionStorage.setItem('option1', JSON.stringify(options1));
+    sessionStorage.setItem('option2', JSON.stringify(options2));
+    sessionStorage.setItem('option3', JSON.stringify(options3));
+    sessionStorage.setItem('option4', JSON.stringify(options4));
+    sessionStorage.setItem('option5', JSON.stringify(options5));
 
     function objetoOpciones(tabla){
     if (sessionStorage.getItem('permisos') === '1') {
@@ -111,13 +117,14 @@ class DemoCarousel extends Component {
     } else {
       return  null; // Otra condición si es necesario
     }
-
+  
   }
 
     return (
       < >
-
+        
         <BarraNav />
+
           <Carousel renderThumbs={this.renderThumbs}>
             <div className='col'>
               <ImageCard 

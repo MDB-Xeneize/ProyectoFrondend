@@ -263,7 +263,7 @@ export class RegistroVehiculoClass extends Component {
 
         return (
             <>
-            <div className='container top'>
+            <div className='container'>
                 <div className='row'>
                     <div className='col'>
                         

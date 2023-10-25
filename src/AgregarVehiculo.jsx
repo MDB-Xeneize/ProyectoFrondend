@@ -230,7 +230,7 @@ export class AgregarVehiculoClass extends Component{
             <div className='container'>
             <div className='row'>
                 <div className='col'>
-                    <h1>Registrar Vehiculo</h1>
+                {this.props.registro.extra===true ? <h1>Modificar Registro de Vehículo</h1>:<h1>Registrar Vehículo</h1>};
                 </div>
             </div>
 

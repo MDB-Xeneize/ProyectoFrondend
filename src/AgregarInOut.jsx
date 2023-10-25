@@ -277,7 +277,7 @@ debugger
             <div className='container'>
             <div className='row'>
                 <div className='col'>
-                    <h1>Registrar Ingreso o Egreso</h1>
+                    {this.props.registro.extra===true ? <h1>Modificar Registro de Acceso</h1>:<h1>Registrar Movimiento</h1>};
                 </div>
             </div>
 
@@ -302,7 +302,7 @@ debugger
                         </select>
                         <br />
 
-                        <div className="form-floating">
+                        <div className="form-floating detras">
                             <input
                                 type="date"
                                 className="form-control"
@@ -315,7 +315,7 @@ debugger
                             <label htmlFor="fecha">Fecha</label>
                         </div>
                         <br/>
-                        <div className="form-floating">
+                        <div className="form-floating detras">
                             <input
                                 type="text"
                                 className="form-control"
@@ -329,7 +329,7 @@ debugger
                         </div>
                         <br />
 
-                        <div className="form-floating">
+                        <div className="form-floating detras">
                             <input
                                 type="text"
                                 className="form-control"
@@ -345,7 +345,7 @@ debugger
                         <br />
 
 
-                        <div className="form-floating">
+                        <div className="form-floating detras">
                             <input
                                 type="text"
                                 className="form-control"
@@ -359,7 +359,7 @@ debugger
                         </div>
                         <br />
 
-                        <div className="form-floating">
+                        <div className="form-floating detras">
                             <input
                                 type="text"
                                 className="form-control"
@@ -373,7 +373,7 @@ debugger
                         </div>
                         <br />
 
-                        <div className="form-floating">
+                        <div className="form-floating detras">
                             <input
                                 type="number"
                                 className="form-control"
@@ -387,7 +387,7 @@ debugger
                         </div>
                         <br />
                      
-                        <select className="form-select"
+                        <select className="form-select detras"
                             aria-label="Default select example"
                             id="id_chofer"
                             onChange={this.handleChange}

@@ -1,5 +1,6 @@
 import React from 'react';
 import {  useParams,useNavigate } from 'react-router-dom';
+import SeparateWays from './AgregarSeparate';
 
 class BarraNavClass extends React.Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class BarraNavClass extends React.Component {
 
     render(){
     return (
-        <div className="container barranav">
+        <>
+        <div className=" barranav">
             <div className='row'>
 
                 <div className='col-8 abs-center'>
@@ -41,10 +43,12 @@ class BarraNavClass extends React.Component {
                             </button>
                             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div className="navbar-nav">
-                                    {this.state.token !== "" && this.state.token !== null ? (null):(<a className="nav-link active textoNav" aria-current="page" href="http://localhost:3000/Login"><i>Login</i></a>) }
+                                    {this.state.token !== "" && this.state.token !== null ? (null):(<a className="nav-link  textoNav" aria-current="page" href="http://localhost:3000/Login"><i>Login</i></a>) }
                                     {this.state.token !== "" && this.state.token !== null ? (<a className="nav-link textoNav" href="http://localhost:3000/Menu"><i>Menú</i></a>):(null) }
                                     {this.state.token !== "" && this.state.token !== null ? (null):(<a className="nav-link textoNav" href="http://localhost:3000/Contactos"><i>Contactos</i></a>) }
-                                    {this.state.token !== "" && this.state.token !== null? (<a className="nav-link textoNav" href="http://localhost:3000/UsuarioAgregar" tabIndex="-1" aria-disabled="true"><i>Registrar Usuarios</i></a>):(null) }
+                                    {this.state.token !== "" && this.state.token !== null&&sessionStorage.getItem('permisos') === '3'? (<a className="nav-link textoNav" href="http://localhost:3000/UsuarioAgregar" tabIndex="-1" aria-disabled="true"><i>Registrar Usuarios</i></a>):(null) }
+                                    {this.state.token !== "" && this.state.token !== null&&sessionStorage.getItem('permisos') !== '3'? (<a className="nav-link textoNav" href="http://localhost:3000/UsuarioModificar" tabIndex="-1" aria-disabled="true"><i>Modificar  Usuarios</i></a>):(null) }
+
                                     {this.state.token !== "" && this.state.token !== null ? (<button className="nav-link textoNav"  onClick={this.handleClickSalir } tabIndex="-1" aria-disabled="true"><i>Salir</i></button>):(null) } 
                                 </div>
                             </div>
@@ -57,6 +61,8 @@ class BarraNavClass extends React.Component {
             </div>
 
         </div>
+        <SeparateWays/>
+        </>
     );
 }
 }

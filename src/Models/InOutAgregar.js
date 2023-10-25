@@ -1,7 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import AgregarInOut from '../AgregarInOut';
-
+import NavOptions from '../navOptions';
 function InOutAgregar(datos){
     debugger
     return(
@@ -9,6 +9,7 @@ function InOutAgregar(datos){
         <>
         <BarraNav/>
         <AgregarInOut dato={datos}/>
+        <NavOptions opcion='option1'/>
         </>
         )
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import RegistroInOut from '../RegistroInOut';
-
+import NavOptions from '../navOptions';
 
 function InOutBorrar(){
     
@@ -9,6 +9,7 @@ function InOutBorrar(){
         <>
         <BarraNav/>
         <RegistroInOut borrar={true} />
+        <NavOptions opcion='option1'/>
         </>
     )
     

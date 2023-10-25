@@ -215,7 +215,7 @@ debugger
             <div className='container'>
             <div className='row'>
                 <div className='col'>
-                    <h1>Registrar Service</h1>
+                {this.props.registro.extra===true ? <h1>Modificar Registro de Service</h1>:<h1>Registrar Service</h1>};
                 </div>
             </div>
 

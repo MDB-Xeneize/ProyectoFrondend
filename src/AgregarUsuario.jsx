@@ -19,7 +19,7 @@ export class AgregarUsuarioClass extends Component {
             rol: '',
             permisos: '',
             Usuario: [],
-            registropas: ''
+            desabilitar: true
         }
     }
 
@@ -31,7 +31,7 @@ export class AgregarUsuarioClass extends Component {
             this.setState({
                 nickname: this.props.registro.registro.nickname,
                 email: this.props.registro.registro.email,
-                password: this.props.registro.registro.password,
+                password: 'Ingrese una contraseña',//this.props.registro.registro.password,
                 rol: this.props.registro.registro.rol,
                 permisos: this.props.registro.registro.permisos,
                 id_usuario: this.props.registro.registro.id_usuario
@@ -46,7 +46,7 @@ export class AgregarUsuarioClass extends Component {
         }
 
         const url = "http://localhost:8080/api/usuario";
-        fetch(url,parametros)
+        fetch(url, parametros)
             .then(res => {
                 return res.json()
                     .then(body => {
@@ -97,6 +97,9 @@ export class AgregarUsuarioClass extends Component {
         //   this.setState({ [name]: formattedDate });
         // } else {
         this.setState({ [name]: value });
+        if (name === 'password') {
+            this.setState({'desabilitar':false})
+        }
         // }
 
         // this.setState({ [event.target.name]: event.target.value });
@@ -107,91 +110,102 @@ export class AgregarUsuarioClass extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
         debugger
-        let registro = {
-            nickname: this.state.nickname,
-            email: this.state.email,
-            password: this.state.password,
-            rol: this.state.rol,
-            permisos: this.state.permisos,
-            id_usuario: this.state.id_usuario
-            
-        }
-        //Es Modificar o Agregar?
-        let parametros = null;
-        if (this.props.registro.extra !== undefined) {
-            parametros = {
-                method: 'PUT',
-                body: JSON.stringify(registro),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': sessionStorage.getItem('token')
-                }
+        if (this.state.desabilitar === false) {
+            let registro = {
+                nickname: this.state.nickname,
+                email: this.state.email,
+                password: this.state.password,
+                rol: this.state.rol,
+                permisos: this.state.permisos,
+                id_usuario: this.state.id_usuario
+
             }
-
-        }
-        else {
-            parametros = {
-                method: 'POST',
-                body: JSON.stringify(registro),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': sessionStorage.getItem('token')
-                }
-            }
-        }
-        debugger
-        const url = this.props.registro.extra !== undefined ? `http://localhost:8080/api/usuario/${this.props.registro.registro.id_usuario}` : "http://localhost:8080/api/usuario"
-        fetch(url, parametros)
-            .then(res => {
-                return res.json()
-                    .then(body => {
-                        return {
-                            status: res.status,
-                            ok: res.ok,
-                            headers: res.headers,
-                            body: body
-                        };
-                    })
-            }).then(
-                result => {
-                    debugger
-                    if (result.ok) {
-                        const notify = () => toast("pelarse");
-
-                        toast.success(result.body.message, {
-                            position: "bottom-center",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                        });
-
-                        debugger
-                        this.props.useNavigateEnvuelta('/Usuario')
-
-                    } else {
-                        toast.error(result.body.message, {
-                            position: "bottom-center",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                        });
+            //Es Modificar o Agregar?
+            let parametros = null;
+            if (this.props.registro.extra !== undefined) {
+                parametros = {
+                    method: 'PUT',
+                    body: JSON.stringify(registro),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': sessionStorage.getItem('token')
                     }
                 }
 
+            }
+            else {
+                parametros = {
+                    method: 'POST',
+                    body: JSON.stringify(registro),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': sessionStorage.getItem('token')
+                    }
+                }
+            }
+            debugger
+            const url = this.props.registro.extra !== undefined ? `http://localhost:8080/api/usuario/${this.props.registro.registro.id_usuario}` : "http://localhost:8080/api/usuario"
+            fetch(url, parametros)
+                .then(res => {
+                    return res.json()
+                        .then(body => {
+                            return {
+                                status: res.status,
+                                ok: res.ok,
+                                headers: res.headers,
+                                body: body
+                            };
+                        })
+                }).then(
+                    result => {
+                        debugger
+                        if (result.ok) {
+                            const notify = () => toast("pelarse");
 
-            ).catch(
-                (error) => { console.log(error) }
-            );
+                            toast.success(result.body.message, {
+                                position: "bottom-center",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            });
+
+                            debugger
+                            this.props.useNavigateEnvuelta('/Usuario')
+
+                        } else {
+                            toast.error(result.body.message, {
+                                position: "bottom-center",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            });
+                        }
+                    }
 
 
+                ).catch(
+                    (error) => { console.log(error) }
+                );
+
+        }
+        else { toast.error("El password es requerido", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });}
     }
 
 
@@ -222,7 +236,7 @@ export class AgregarUsuarioClass extends Component {
                 <div className='container'>
                     <div className='row'>
                         <div className='col'>
-                            <h1>Registrar Usuario</h1>
+                            {this.props.registro.extra === true ? <h1>Modificar Registro de Usuario</h1> : <h1>Registrar Usuario</h1>};
                         </div>
                     </div>
 
@@ -269,7 +283,7 @@ export class AgregarUsuarioClass extends Component {
                                         type="text"
                                         className="form-control"
                                         id="password"
-                                        placeholder="xxxxxxxxxxxx"
+                                        placeholder="Ingrese una contraseña"
                                         onChange={this.handleChange}
                                         value={this.state.password}
                                         name='password'
@@ -278,23 +292,24 @@ export class AgregarUsuarioClass extends Component {
                                 </div>
 
                                 <br />
+                                {sessionStorage.getItem('permisos') === '3' ?
+                                    <select className="form-select"
+                                        id="rol"
+                                        aria-label="Default select example"
+                                        onChange={this.handleChange}
+                                        value={this.state.rol}
+                                        name='rol'
+                                    >
+                                        <option selected disabled>Rol</option>
+                                        <option value="Administrador">Administrador del sistema</option>
+                                        <option value="Supervisor">Supervisor de logística</option>
+                                        <option value="Usuario">Usuario de registro</option>
+                                        <option value="Soporte">Soporte técnico</option>
+                                        <option value="Auditor">Auditor de Seguridad</option>
+                                        <option value="Mantenimiento">Personal de mantenimiento</option>
+                                    </select>
 
-                                <select className="form-select"
-                                    id="rol"
-                                    aria-label="Default select example"
-                                    onChange={this.handleChange}
-                                    value={this.state.rol}
-                                    name='rol'
-                                >
-                                    <option selected disabled>Rol</option>
-                                    <option value="Administrador">Administrador del sistema</option>
-                                    <option value="Supervisor">Supervisor de logística</option>
-                                    <option value="Usuario">Usuario de registro</option>
-                                    <option value="Soporte">Soporte técnico</option>
-                                    <option value="Auditor">Auditor de Seguridad</option>
-                                    <option value="Mantenimiento">Personal de mantenimiento</option>
-                                </select>
-
+                                    : null}
 
                                 <br />
 
@@ -310,20 +325,21 @@ export class AgregarUsuarioClass extends Component {
                                     />
                                     <label htmlFor="permisos">Permiso</label>
                                 </div> */}
-                                
-                                <select className="form-select"
-                                    id="permisos"
-                                    aria-label="Default select example"
-                                    onChange={this.handleChange}
-                                    value={this.state.permisos}
-                                    name='permisos'
-                                >
-                                    <option selected disabled>Permiso</option>
-                                    <option value="1">Lectura de registros</option>
-                                    <option value="2">Lectura,Creacion y Modificacion de registros</option>
-                                    <option value="3">Lectura,Creacion,Modificacion y Eliminacion de registros</option>
-                                </select>
-                                <br/>
+                                {sessionStorage.getItem('permisos') === '3' ?
+                                    <select className="form-select"
+                                        id="permisos"
+                                        aria-label="Default select example"
+                                        onChange={this.handleChange}
+                                        value={this.state.permisos}
+                                        name='permisos'
+                                    >
+                                        <option selected disabled>Permiso</option>
+                                        <option value="1">Lectura de registros</option>
+                                        <option value="2">Lectura,Creacion y Modificacion de registros</option>
+                                        <option value="3">Lectura,Creacion,Modificacion y Eliminacion de registros</option>
+                                    </select> : null}
+
+                                <br />
 
                                 <input className='btn btn-primary'
                                     type="submit"
