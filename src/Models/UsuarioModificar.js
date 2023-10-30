@@ -1,7 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import RegistroUsuario from '../RegistroUsuario';
-
+import NavOptions from '../navOptions';
 
 function UsuarioModificar(){
     
@@ -9,6 +9,7 @@ function UsuarioModificar(){
         <>
         <BarraNav/>
         <RegistroUsuario extra='True' />
+        <NavOptions opcion='option5'/>
         </>
     )
     

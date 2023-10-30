@@ -1,7 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import RegistroService from '../RegistroService';
-
+import NavOptions from '../navOptions';
 
 function ServiceModificar(){
     
@@ -9,6 +9,7 @@ function ServiceModificar(){
         <>
         <BarraNav/>
         <RegistroService extra='True' />
+        <NavOptions opcion='option4'/>
         </>
     )
     

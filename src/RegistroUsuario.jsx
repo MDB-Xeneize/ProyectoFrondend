@@ -32,7 +32,7 @@ export class RegistroUsuarioClass extends Component {
     }
 
     componentDidMount() {
-        debugger
+        
         
         let parametros = {
             method: 'GET',
@@ -45,7 +45,7 @@ export class RegistroUsuarioClass extends Component {
         const url = "http://localhost:8080/api/usuario";
         fetch(url,parametros)
             .then(res => {
-                debugger
+               
                 return res.json()
                     .then(body => {
 
@@ -121,7 +121,7 @@ export class RegistroUsuarioClass extends Component {
                             <td>{registro.id_usuario}</td>
                             <td>{registro.nickname}</td>
                             <td>{registro.email}</td>                    
-                            {/* {sessionStorage.getItem('permisos') === '3' ? <td>{registro.password}</td>:null} */}
+                           
                             <td>{registro.rol}</td>
                             {sessionStorage.getItem('permisos') === '3' ? <td>{registro.permisos}</td>:null}
                             
@@ -129,7 +129,7 @@ export class RegistroUsuarioClass extends Component {
                                 {(this.props.borrar===undefined||this.state.seleccion!=='')?null: 
                                         <div className="form-check form-switch">
                                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"onClick={() => this.handleClickSwitch(registro)}/>
-                                        <label className="form-check-label" for="flexSwitchCheckDefault"></label>
+                                        <label className="form-check-label" for="flexSwitchCheckDefault">Eliminar</label>
                                         </div>
     
                                 }
@@ -159,7 +159,7 @@ export class RegistroUsuarioClass extends Component {
             else{
                 if(sessionStorage.getItem('nickname') === registro.nickname ){
                     sessionStorage.setItem('modifyMyUser', true)
-                    // const modifyMyUser=true;
+                  
                     return(
                         <>
                             <tr key={index}  >
@@ -176,7 +176,7 @@ export class RegistroUsuarioClass extends Component {
                                     {(this.props.borrar===undefined||this.state.seleccion!=='')?null: 
                                             <div className="form-check form-switch">
                                             <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"onClick={() => this.handleClickSwitch(registro)}/>
-                                            <label className="form-check-label" for="flexSwitchCheckDefault"></label>
+                                            <label className="form-check-label" for="flexSwitchCheckDefault">Eliminar</label>
                                             </div>
         
                                     }
@@ -211,13 +211,13 @@ export class RegistroUsuarioClass extends Component {
  
 
     handleClickModificar(registro){
-        debugger
+        
         this.setState({redireccion:true , registroSelect: registro});
  //Estado modificar o informar
     }
     
     handleClickSwitch(registro){
-        debugger
+       
         var seleccion = this.state.seleccion ; // Copia el objeto seleccion del estado
 
         if (seleccion!==''&& seleccion===registro.id_usuario) {
@@ -234,10 +234,10 @@ export class RegistroUsuarioClass extends Component {
     }
 
     handleClickBorrar(registro){
-        
- //Estado modal activado
         debugger
-        const seleccionJSON = JSON.stringify(this.state.seleccion)
+ //Estado modal activado
+       
+        // const seleccionJSON = JSON.stringify(this.state.seleccion)
 
     let parametros = {
         method: 'DELETE',
@@ -248,11 +248,11 @@ export class RegistroUsuarioClass extends Component {
         }
     }  
  
-    debugger
+   debugger
  const url = `http://localhost:8080/api/usuario/${registro.id_usuario}`;
  fetch(url, parametros)
      .then(res => {
-         debugger
+       
          return res.json()
              .then(body => {
 
@@ -266,9 +266,9 @@ export class RegistroUsuarioClass extends Component {
      }).then(
 
         result => {
-            debugger
+           
             if (result.ok) {
-                toast.success(result.body.message, {
+                toast.success('Usuario Eliminado', {           //result.body.message
                     position: "bottom-center",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -277,9 +277,10 @@ export class RegistroUsuarioClass extends Component {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                });        
-                var seleccion = this.state.seleccion ; // Copia el objeto seleccion del estado
-                this.setState({ seleccion });
+                });       
+                debugger 
+                // var seleccion = this.state.seleccion ; // Copia el objeto seleccion del estado
+                // this.setState({ seleccion });
                 this.componentDidMount();
             }else {
                  toast.error(result.body.message, {
@@ -293,7 +294,7 @@ export class RegistroUsuarioClass extends Component {
                      theme: "light",
                  });
              }
-             debugger
+            
          }
      ).catch(
          (error) => { console.log(error) }
@@ -304,11 +305,7 @@ export class RegistroUsuarioClass extends Component {
 
     render(){
         
-        debugger
-        // if(this.state.modales){
-        //     this.borrarRegistro();
-        //     this.props.useNavigateEnvuelta('/InOut')
-        // }
+    
         const Fila = this.state.Usuario.map((registro, index) => {
             return (
                 <>
@@ -323,7 +320,12 @@ export class RegistroUsuarioClass extends Component {
 
         return (
             <>
-            <div className='container'>
+            <div className='container bottom'>
+            <div className='row'>
+                <div className='col'>
+                    {this.props.borrar===true ? <h3>Eliminar Usuario</h3>:<h3>Registro de Usuarios</h3>};
+                </div>
+            </div>
                 <div className='row'>
                     <div className='col'>
                         
@@ -347,7 +349,8 @@ export class RegistroUsuarioClass extends Component {
                                         <th>
                                             Rol
                                         </th>
-                                        {sessionStorage.getItem('permisos') === '3'|| sessionStorage.getItem('modifyMyUser')==='true' ?   <th>
+                                        {sessionStorage.getItem('permisos') === '3'|| sessionStorage.getItem('modifyMyUser')==='true' ?  
+                                        <th colSpan={3}>
                                             Permiso
                                         </th>:null}
                                       
@@ -374,13 +377,9 @@ export class RegistroUsuarioClass extends Component {
 
 export default RegistroUsuario;
 
-
 export function RegistroUsuario({extra,borrar}) {
-    debugger
     const parametros = useParams();
-    
     const useNavigateP = useNavigate();
-    
     return (
         <>
             <RegistroUsuarioClass extra={extra} borrar={borrar} useNavigateEnvuelto={useNavigateP} params={parametros} />

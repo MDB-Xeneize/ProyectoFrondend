@@ -23,7 +23,6 @@ function Inicio() {
 
 
         const Logout = (token) => {
-                debugger
                 sessionStorage.removeItem('token');
                 setToken("");
                 navigate('/')
@@ -32,7 +31,6 @@ function Inicio() {
 
 
         const handleClickIngresar = () => {
-                debugger
                 navigate("/Login");
 
         }
@@ -40,7 +38,7 @@ function Inicio() {
 
       //  if (token !== "" && token !== null) {
                 return (
-                        <>
+                        <div className=' bottom'>
                                 <BarraNav />
                                 <Carrusel />
                                 <div className='row'>
@@ -53,7 +51,7 @@ function Inicio() {
                                         <div className='col-4'>
                                         </div>
                                 </div>
-                        </>
+                        </div>
                 )
    
 

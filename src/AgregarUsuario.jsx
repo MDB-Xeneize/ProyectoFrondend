@@ -16,15 +16,15 @@ export class AgregarUsuarioClass extends Component {
             nickname: '',
             email: '',
             password: '',
-            rol: '',
-            permisos: '',
+            rol: 'Administrador',
+            permisos: '1',
             Usuario: [],
             desabilitar: true
         }
     }
 
     componentDidMount() {
-        debugger
+
 
         if (this.props.registro.registro !== undefined) {
 
@@ -66,7 +66,7 @@ export class AgregarUsuarioClass extends Component {
                             Usuario: result.body
                         });
                     } else {
-                        debugger
+
                         toast.error(result.body.message, {
                             position: "bottom-center",
                             autoClose: 5000,
@@ -90,27 +90,98 @@ export class AgregarUsuarioClass extends Component {
 
     handleChange = (event) => {
         const { name, value } = event.target;
-        debugger
-        // Si estás manejando la fecha, puedes formatearla antes de actualizar el estado
-        // if (name === 'fecha_nacimiento') {
-        //   const formattedDate = moment(value).format('YYYY-MM-DD');
-        //   this.setState({ [name]: formattedDate });
-        // } else {
-        this.setState({ [name]: value });
-        if (name === 'password') {
-            this.setState({'desabilitar':false})
+        if (name === 'nickname' && value.length <= 20) {
+            this.setState({ [name]: value });
         }
-        // }
-
-        // this.setState({ [event.target.name]: event.target.value });
+        if (name === 'email' && value.length <= 40) {
+            this.setState({ [name]: value });
+        }
+        if (name === 'password' && value.length <= 100) {
+            // this.setState({'desabilitar':false})
+            this.setState({ [name]: value });
+        }
+        else {
+            this.setState({ [name]: value });
+        }
     }
+
+
+
+
+    verificarCampos = () => {
+        let enviar = true;
+
+        if (this.state.nickname === '') {
+            enviar = false;
+            this.MensajeError("Agregue el Nickname, menos de 20 caracteres");
+        }
+        if (this.state.email === '') {
+            enviar = false;
+            this.MensajeError("Agregue el email");
+        } else {
+         
+            const count = (this.state.email.match(/@/g) || []).length;
+            if (count === 1) {
+                const parts = this.state.email.split("@");
+                let username = parts[0].toString();
+                const dominio = parts[1].toString();
+                var validUsernameRegex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~.-]+$/; //expresion regular para validar el username del email
+                if (validUsernameRegex.test(username)) { 
+                    username = dominio;
+                    var validUsernameRegex =  /^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/; //expresion regular para validar el dominio del email
+                    if (validUsernameRegex.test(username)) { 
+                        enviar = true;
+                    }else{
+                        enviar = false;
+                        this.MensajeError("El dominio del email puede contener solo letras, numeros - y varios . pero no seguidos ");
+                    }
+
+                }else{
+                    enviar = false;
+                this.MensajeError("El username del email puede contener solo letras, numeros y estos signos !#$%&'*+/=?^_`{|}~.-]+$/");
+                }
+
+            } else {
+                enviar = false;
+                this.MensajeError("El email debe contener @ y una sola vez");
+            }
+        }
+
+        if (this.state.password === '') {
+            enviar = false;
+            this.MensajeError("El password es requerido");
+        } else {
+            if (this.state.password === '') {
+                enviar = false;
+                this.MensajeError("El password es requerido");
+            }
+
+        }
+        return enviar
+    }
+
+    MensajeError(mensaje) {
+        toast.error(mensaje, {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
+
+
 
 
 
     handleSubmit = (event) => {
         event.preventDefault()
-        debugger
-        if (this.state.desabilitar === false) {
+        const enviar = this.verificarCampos();
+        if (enviar === true) {
+
             let registro = {
                 nickname: this.state.nickname,
                 email: this.state.email,
@@ -143,7 +214,7 @@ export class AgregarUsuarioClass extends Component {
                     }
                 }
             }
-            debugger
+
             const url = this.props.registro.extra !== undefined ? `http://localhost:8080/api/usuario/${this.props.registro.registro.id_usuario}` : "http://localhost:8080/api/usuario"
             fetch(url, parametros)
                 .then(res => {
@@ -158,9 +229,8 @@ export class AgregarUsuarioClass extends Component {
                         })
                 }).then(
                     result => {
-                        debugger
+
                         if (result.ok) {
-                            const notify = () => toast("pelarse");
 
                             toast.success(result.body.message, {
                                 position: "bottom-center",
@@ -173,7 +243,7 @@ export class AgregarUsuarioClass extends Component {
                                 theme: "light",
                             });
 
-                            debugger
+
                             this.props.useNavigateEnvuelta('/Usuario')
 
                         } else {
@@ -195,48 +265,19 @@ export class AgregarUsuarioClass extends Component {
                     (error) => { console.log(error) }
                 );
 
+
         }
-        else { toast.error("El password es requerido", {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });}
     }
 
 
     render() {
-        // const OptionChofer = this.state.InOutChofer.map((chofer, index) => {
-        //     return (
-
-        //         <>
-        //         <option key={index} value={chofer.id_chofer}>{`${chofer.id_chofer} ${chofer.dni} ${chofer.apellido}  ${chofer.nombre}`}</option>
-        //         </>
-        //         )
-        //     }
-        // )
-
-        // const OptionVehiculo = this.state.InOutVehiculo.map((vehiculo, index) => {
-        //     return (
-
-        //         <>
-        //         <option key={index} value={vehiculo.id_vehiculo}>{`${vehiculo.id_vehiculo} ${vehiculo.matricula}  ${vehiculo.marca}  ${vehiculo.modelo}`}</option>
-        //         </>
-        //         )
-        //     }
-        // )
-
 
         return (
             <>
-                <div className='container'>
+                <div className='container bottom'>
                     <div className='row'>
                         <div className='col'>
-                            {this.props.registro.extra === true ? <h1>Modificar Registro de Usuario</h1> : <h1>Registrar Usuario</h1>};
+                            {this.props.registro.extra !== undefined ? <h3>Modificar Registro de Usuario</h3> : <h3>Registrar Usuario</h3>};
                         </div>
                     </div>
 
@@ -280,7 +321,7 @@ export class AgregarUsuarioClass extends Component {
 
                                 <div className="form-floating">
                                     <input
-                                        type="text"
+                                        type="password"
                                         className="form-control"
                                         id="password"
                                         placeholder="Ingrese una contraseña"
@@ -313,18 +354,6 @@ export class AgregarUsuarioClass extends Component {
 
                                 <br />
 
-                                {/* <div className="form-floating">
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        id="permisos"
-                                        placeholder="número"
-                                        onChange={this.handleChange}
-                                        value={this.state.permisos}
-                                        name='permisos'
-                                    />
-                                    <label htmlFor="permisos">Permiso</label>
-                                </div> */}
                                 {sessionStorage.getItem('permisos') === '3' ?
                                     <select className="form-select"
                                         id="permisos"
@@ -363,7 +392,7 @@ export default AgregarUsuario;
 
 
 export function AgregarUsuario(registro, extra) {
-    debugger
+
     const parametros = useParams();
 
     const useNavigateP = useNavigate();

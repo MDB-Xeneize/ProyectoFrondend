@@ -1,14 +1,14 @@
 import React from 'react';
 import BarraNav from '../nav';
 import AgregarChofer from '../AgregarChofer';
+import NavOptions from '../navOptions';
 
 function ChoferAgregar(datos){
-    debugger
-    return(
-        
+    return(  
         <>
         <BarraNav/>
         <AgregarChofer dato={datos}/>
+        <NavOptions opcion='option3'/>
         </>
         )
 }

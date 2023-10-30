@@ -1,7 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import RegistroUsuario from '../RegistroUsuario';
-
+import NavOptions from '../navOptions';
 
 function UsuarioBorrar(){
     
@@ -9,6 +9,7 @@ function UsuarioBorrar(){
         <>
         <BarraNav/>
         <RegistroUsuario borrar={true} />
+        <NavOptions opcion='option5'/>
         </>
     )
     

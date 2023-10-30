@@ -20,15 +20,13 @@ export class RegistroChoferClass extends Component {
             redireccion:false,
             modales:false,
             seleccion:'',
-            // modal: false
+          
         }
-        // this.handleClickDelete = this.handleClickBorrar.bind(this)
-        // this.closeModal = this.closeModal.bind(this)
-        // this.showModal = this.showModal.bind(this)
+        
     }
 
     componentDidMount() {
-        debugger
+    
         let parametros = {
             method: 'GET',
             headers: {
@@ -39,7 +37,7 @@ export class RegistroChoferClass extends Component {
         const url = "http://localhost:8080/api/chofer";
         fetch(url,parametros)
             .then(res => {
-                debugger
+            
                 return res.json()
                     .then(body => {
 
@@ -86,7 +84,7 @@ export class RegistroChoferClass extends Component {
                             <td>{registro.nombre}</td>
                             <td>{registro.apellido}</td> 
                             <td>{registro.dni}</td>                    
-                            <td>{registro.fecha_nacimiento}</td>
+                            <td>{moment.utc(registro.fecha_nacimiento).format('DD/MM/YYYY')}</td>
                             <td>
 
                                 {(this.props.extra===true)?
@@ -114,7 +112,7 @@ export class RegistroChoferClass extends Component {
                         <td>{registro.nombre}</td>
                         <td>{registro.apellido}</td>                    
                         <td>{registro.dni}</td>
-                        <td>{moment.utc(registro.fecha_nacimiento).format('MM/DD/YYYY')}</td>
+                        <td>{moment.utc(registro.fecha_nacimiento).format('DD/MM/YYYY')}</td>
                         <td>
                             {(this.props.borrar===undefined||this.state.seleccion!=='')?null: 
                                     <div className="form-check form-switch">
@@ -150,14 +148,14 @@ export class RegistroChoferClass extends Component {
  
 
     handleClickModificar(registro){
-        debugger
+    
         this.setState({redireccion:true , registroSelect: registro});
  //Estado modificar o informar
     }
     
     handleClickSwitch(registro){
-        debugger
-        var seleccion = this.state.seleccion ; // Copia el objeto seleccion del estado
+    
+        var seleccion = this.state.seleccion ; 
 
         if (seleccion!==''&& seleccion===registro.id_chofer) {
           // Si la clave ya existe en seleccion, la eliminamos
@@ -167,7 +165,7 @@ export class RegistroChoferClass extends Component {
           seleccion = registro.id_chofer;
         }
       
-        // Actualizamos el estado con la nueva selección
+        // Actualizamos el estado 
         this.setState({ seleccion });
     
     }
@@ -175,9 +173,7 @@ export class RegistroChoferClass extends Component {
     handleClickBorrar(registro){
         
 
- //Estado modal activado
-        debugger
-       // const seleccionJSON = JSON.stringify(this.state.seleccion)
+ 
     let parametros = {
         method: 'DELETE',
         headers: {
@@ -187,11 +183,11 @@ export class RegistroChoferClass extends Component {
         }
     }  
  
-    debugger
+    
  const url = `http://localhost:8080/api/chofer/${registro.id_chofer}`;
  fetch(url, parametros)
      .then(res => {
-         debugger
+         
          return res.json()
              .then(body => {
 
@@ -229,7 +225,7 @@ export class RegistroChoferClass extends Component {
                      theme: "light",
                  });
              }
-             debugger
+             
          }
      ).catch(
          (error) => { console.log(error) }
@@ -240,11 +236,7 @@ export class RegistroChoferClass extends Component {
 
     render(){
         
-        debugger
-        // if(this.state.modales){
-        //     this.borrarRegistro();
-        //     this.props.useNavigateEnvuelta('/InOut')
-        // }
+
         const Fila = this.state.Chofer.map((registro, index) => {
             return (
                 <>
@@ -259,7 +251,12 @@ export class RegistroChoferClass extends Component {
 
         return (
             <>
-            <div className='container'>
+            <div className='container bottom'>
+            <div className='row'>
+                <div className='col'>
+                    {this.props.borrar===true ? <h3>Eliminar Chofer</h3>:<h3>Registro de Chofer</h3>};
+                </div>
+            </div>
                 <div className='row'>
                     <div className='col'>
                         
@@ -279,7 +276,7 @@ export class RegistroChoferClass extends Component {
                                         <th>
                                             DNI
                                         </th>
-                                        <th>
+                                        <th colSpan={3}>
                                             fecha de Nacimiento
                                         </th>
                                         
@@ -307,7 +304,7 @@ export default RegistroChofer;
 
 
 export function RegistroChofer({extra,borrar}) {
-    debugger
+   
     const parametros = useParams();
     
     const useNavigateP = useNavigate();

@@ -1,7 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import RegistroChofer from '../RegistroChofer';
-
+import NavOptions from '../navOptions';
 
 function ChoferBorrar(){
     
@@ -9,6 +9,7 @@ function ChoferBorrar(){
         <>
         <BarraNav/>
         <RegistroChofer borrar={true} />
+        <NavOptions opcion='option3'/>
         </>
     )
     

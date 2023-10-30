@@ -1,7 +1,8 @@
 body {
-  background:linear-gradient(0deg,white 1%,rgb(99, 99, 223) 40%,blue 80%,white ) ;
+  background-image:  url(./images/fondoAccesoDeg.jpg);
+  opacity: 0.9;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -9,11 +10,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
  
+ 
 }
 
 html{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
 }
 
@@ -46,7 +48,8 @@ min-height: 100%;
 } 
 
 .card-body{
-  background-color: bisque;
+  background-color:rgb(196, 194, 168);
+  border-radius: 1%;
 }
 
 .hovered-thumb {
@@ -54,22 +57,25 @@ min-height: 100%;
   transition: transform 0.3s; /* Agregar una transición suave */
 }
 
-.thumbero{
-  box-shadow: 10px 10px 5px black;
+.thumbsCarro{
+  background-color:  rgb(196, 194, 168);
 }
 
 .textoNav{
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size:x-large;
   font-weight: 700;
-  color:navajowhite;
+  color:black;
+}
+.textoNav:hover{
+  color:gray;
 }
 
 .textoRell{
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size:medium;
   font-weight: 300;
-  color:navajowhite;
+  color:black;
 } 
 
  .iconos{
@@ -78,37 +84,74 @@ min-height: 100%;
   max-width: 2vw;
   max-height: 2vw;
   padding: auto;
+  border: 3px solid black;
+  border-radius: 10%;
+ 
+
 }
 .separate{
+  position:relative;
+  bottom: 0;
   margin: 0;
   width: 100%;
   padding-top: 10%;
 }
 .barranav{ 
   position:fixed;
-  background-color:blue;
+  background-color:rgb(196, 194, 168);
   width: 100vw;
   z-index: 1;
 } 
 .navOption{
-
+  
   position:fixed;
-  bottom: 0;
- 
+  left: 90%;
+  bottom: 50%;
   width: 100vw;
   z-index: 1;
 }
 
+.gapIcon{
+  margin: 0;
+  padding-bottom:20% ;
+}
 .top{
   margin: 1px;
   width: 100%;
   height: 100%;
   padding-top: 30%;
-
-
 }
+.bottom{
+  height: 100vh;
+  /* padding-bottom: 5%; */
+}
+.bottomButton{
 
+  margin:0;
+  width: 100%;
+  height: 10%;
+  position: relative;
+  z-index: 0;
+  padding-bottom: 5%;
+}
 .detras{
   position: relative;
   z-index: 0;
+}
+
+.cuerpoTabla{
+  margin: 0;
+  width: 100%;
+  border-radius: 5%;
+ /* background-image: url(./images/fondoAcceso.jpg); */
+}
+.borderKing{
+  border-radius: 5px;
+}
+
+.tablaAdicionalHead{
+  border-top: 5px solid rgb(80, 80, 243);
+}
+.tablaAdicionalRow{
+  border-bottom: 5px solid rgb(80, 80, 243);
 }

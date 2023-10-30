@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import ImageCard from '../imageCard';
 import BarraNav from '../nav';
-import SeparateWays from '../AgregarSeparate';
+
 
 
 import thumbRegistroInOut from '../images/thumbRegistroInOutX.png'
@@ -29,54 +29,35 @@ class DemoCarousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHovered: false,
+      // isHovered: false,
       token:'' 
     };
 
   }
   componentDidMount() {
-    debugger
     const tokenG = sessionStorage.getItem('token');
     if (tokenG !== this.state.token) {
       this.setState({ token: tokenG });
     }
   }
 
-  handleMouseOver(index) {
-    // Cambia el estado para indicar que el mouse está sobre el thumb en el índice especificado.
-    //this.setState({ hoveredThumbIndex: index });
-  }
-
-  handleMouseOut() {
-    this.setState({ isHovered: true })
-    // Cuando el mouse sale de cualquier thumb, restaura el estado para indicar que no hay ningún thumb con el mouse sobre él.
-    //this.setState({ hoveredThumbIndex: null });
-  }
-
-
   renderThumbs(children) {
 
 
-    // En esta función, puedes personalizar los thumbs como desees
-    // children es un arreglo de las diapositivas originales
+ 
     return children.map((child, index) => (
       <div key={index}
-        className="custom-thumb thumbero"
-      //onMouseOver={() => this.handleMouseOver(index)}
-      // onMouseOut={() => this.handleMouseOut()} 
+        className="custom-thumb"
+
       >
-        {/* Agrega aquí tus thumbs personalizados */}
-        {index === 0 && <img src={thumbRegistroInOut} alt={`Thumb ${index}`} />}
-        {index === 1 && <img src={thumbRegistroVehiculos} alt={`Thumb ${index}`} />}
-        {index === 2 && <img src={thumbRegistroConductores} alt={`Thumb ${index}`} />}
-        {index === 3 && <img src={thumbRegistroMantenimiento} alt={`Thumb ${index}`} />}
-        {index === 4 && <img src={thumbRegistroUsuarios} alt={`Thumb ${index}`} />}
+        {index === 0 && <img src={thumbRegistroInOut} className="thumbsCarro" alt={`Thumb ${index}`} />}
+        {index === 1 && <img src={thumbRegistroVehiculos} className="thumbsCarro" alt={`Thumb ${index}`} />}
+        {index === 2 && <img src={thumbRegistroConductores} className="thumbsCarro" alt={`Thumb ${index}`} />}
+        {index === 3 && <img src={thumbRegistroMantenimiento} className="thumbsCarro" alt={`Thumb ${index}`} />}
+        {index === 4 && <img src={thumbRegistroUsuarios} className="thumbsCarro" alt={`Thumb ${index}`} />}
       </div>
     ));
   }
-
-
-
 
   render() {
   
@@ -89,6 +70,7 @@ class DemoCarousel extends Component {
     const options4 = objetoOpciones('Service');
 
     const options5 = objetoOpciones('Usuario');
+
     sessionStorage.setItem('option1', JSON.stringify(options1));
     sessionStorage.setItem('option2', JSON.stringify(options2));
     sessionStorage.setItem('option3', JSON.stringify(options3));
@@ -98,21 +80,21 @@ class DemoCarousel extends Component {
     function objetoOpciones(tabla){
     if (sessionStorage.getItem('permisos') === '1') {
       return {
-        'Listar': {url:`http://localhost:3000/${tabla}`,icono:iconoListar},
+        'Listar': {url:`http://localhost:3000/${tabla}`,icono:iconoListar,color:"beige"},
       };
     } else if (sessionStorage.getItem('permisos') === '2') {
      return {
-        'Listar': {url:`http://localhost:3000/${tabla}`,icono:iconoListar},
-        'Agregar': {url:`http://localhost:3000/${tabla}Agregar `,icono:iconoAgregar},
-        'Modificar': {url:`http://localhost:3000/${tabla}Modificar`,icono:iconoModificar},
+        'Listar': {url:`http://localhost:3000/${tabla}`,icono:iconoListar,color:"beige"},
+        'Agregar': {url:`http://localhost:3000/${tabla}Agregar `,icono:iconoAgregar,color: "rgb(244, 244, 101)"},
+        'Modificar': {url:`http://localhost:3000/${tabla}Modificar`,icono:iconoModificar,color:"rgb(195, 224, 123)"},
         
       };
     } else if (sessionStorage.getItem('permisos') === '3') {
       return  {
-        'Listar': {url:`http://localhost:3000/${tabla}`,icono:iconoListar},
-        'Agregar': {url:`http://localhost:3000/${tabla}Agregar `,icono:iconoAgregar},
-        'Modificar': {url:`http://localhost:3000/${tabla}Modificar`,icono:iconoModificar},
-        'Eliminar': {url:`http://localhost:3000/${tabla}Borrar`,icono:iconoEliminar},
+        'Listar': {url:`http://localhost:3000/${tabla}`,icono:iconoListar,color:"beige"},
+        'Agregar': {url:`http://localhost:3000/${tabla}Agregar `,icono:iconoAgregar,color: "rgb(244, 244, 101)"},
+        'Modificar': {url:`http://localhost:3000/${tabla}Modificar`,icono:iconoModificar,color:"rgb(195, 224, 123)"},
+        'Eliminar': {url:`http://localhost:3000/${tabla}Borrar`,icono:iconoEliminar,color: "rgb(224, 146, 123)"},
       };
     } else {
       return  null; // Otra condición si es necesario
@@ -123,8 +105,11 @@ class DemoCarousel extends Component {
     return (
       < >
         
+       
+        <div className='botom'>
+          
         <BarraNav />
-
+       
           <Carousel renderThumbs={this.renderThumbs}>
             <div className='col'>
               <ImageCard 
@@ -160,7 +145,8 @@ class DemoCarousel extends Component {
             </div>
           </Carousel>
 
-       
+          </div>
+
       </>
     );
   }

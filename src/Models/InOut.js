@@ -8,7 +8,6 @@ function InOut( ){
     return(
         <>
         <BarraNav/>
-        
         <RegistroInOut/>
         <NavOptions opcion='option1'/>
         </>

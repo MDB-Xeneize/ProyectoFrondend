@@ -1,6 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import RegistroService from '../RegistroService';
+import NavOptions from '../navOptions';
 
 function Service(){
     
@@ -8,6 +9,7 @@ function Service(){
         <>
         <BarraNav/>
         <RegistroService/>
+        <NavOptions opcion='option4'/>
         </>
     )
     

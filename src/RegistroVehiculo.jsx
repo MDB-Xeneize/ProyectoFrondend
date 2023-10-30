@@ -25,7 +25,7 @@ export class RegistroVehiculoClass extends Component {
     }
 
     componentDidMount() {
-        debugger
+       
         let parametros = {
             method: 'GET',
             headers: {
@@ -37,7 +37,7 @@ export class RegistroVehiculoClass extends Component {
         const url = "http://localhost:8080/api/vehiculo";
         fetch(url,parametros)
             .then(res => {
-                debugger
+                
                 return res.json()
                     .then(body => {
 
@@ -142,8 +142,8 @@ export class RegistroVehiculoClass extends Component {
                             }
                             
                         </td>
-                        <td>                                                
-                        </td>
+                        {/* <td>                                                
+                        </td> */}
                     </tr>                
                 </>
             )
@@ -152,14 +152,14 @@ export class RegistroVehiculoClass extends Component {
  
 
     handleClickModificar(registro){
-        debugger
+       
         this.setState({redireccion:true , registroSelect: registro});
  //Estado modificar o informar
     }
     
     
     handleClickSwitch(registro){
-        debugger
+       
         var seleccion = this.state.seleccion ; // Copia el objeto seleccion del estado
 
         if (seleccion!==''&& seleccion===registro.id_vehiculo) {
@@ -177,9 +177,8 @@ export class RegistroVehiculoClass extends Component {
 
     handleClickBorrar(registro){
         
- //Estado modal activado
-        debugger
- //       const seleccionJSON = JSON.stringify(this.state.seleccion)
+ 
+
     let parametros = {
         method: 'DELETE',
         headers: {
@@ -189,11 +188,11 @@ export class RegistroVehiculoClass extends Component {
         }
     }  
  
-    debugger
+   
  const url = `http://localhost:8080/api/vehiculo/${registro.id_vehiculo}`;
  fetch(url, parametros)
      .then(res => {
-         debugger
+        
          return res.json()
              .then(body => {
 
@@ -207,7 +206,7 @@ export class RegistroVehiculoClass extends Component {
      }).then(
 
         result => {
-            debugger
+            
             if (result.ok) {
                 toast.success(result.body.message, {
                     position: "bottom-center",
@@ -219,7 +218,7 @@ export class RegistroVehiculoClass extends Component {
                     progress: undefined,
                     theme: "light",
                 });
-                debugger
+               
                 this.componentDidMount();
             }else {
                  toast.error(result.body.message, {
@@ -233,7 +232,7 @@ export class RegistroVehiculoClass extends Component {
                      theme: "light",
                  });
              }
-             debugger
+             
          }
      ).catch(
          (error) => { console.log(error) }
@@ -244,11 +243,8 @@ export class RegistroVehiculoClass extends Component {
 
     render(){
         
-        debugger
-        // if(this.state.modales){
-        //     this.borrarRegistro();
-        //     this.props.useNavigateEnvuelta('/InOut')
-        // }
+      
+   
         const Fila = this.state.Vehiculo.map((registro, index) => {
             return (
                 <>
@@ -263,7 +259,12 @@ export class RegistroVehiculoClass extends Component {
 
         return (
             <>
-            <div className='container'>
+            <div className='container bottom'>
+            <div className='row'>
+                <div className='col'>
+                    {this.props.borrar===true ? <h3>Eliminar Vehiculo</h3>:<h3>Registro de Vehiculo</h3>};
+                </div>
+            </div>
                 <div className='row'>
                     <div className='col'>
                         
@@ -289,7 +290,7 @@ export class RegistroVehiculoClass extends Component {
                                         <th>
                                             Tara
                                         </th>
-                                        <th>
+                                        <th colSpan={2}>
                                             Carga Maxima
                                         </th>
                                         
@@ -317,11 +318,8 @@ export default RegistroVehiculo;
 
 
 export function RegistroVehiculo({extra,borrar}) {
-    debugger
     const parametros = useParams();
-    
     const useNavigateP = useNavigate();
-    
     return (
         <>
             <RegistroVehiculoClass extra={extra} borrar={borrar} useNavigateEnvuelto={useNavigateP} params={parametros} />

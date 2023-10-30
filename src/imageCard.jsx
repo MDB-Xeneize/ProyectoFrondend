@@ -1,36 +1,23 @@
 import React, { Component } from 'react';
-
+import "./index.css";
 import { Icons } from 'react-toastify';
 
 
 
 
 class ImageCard extends Component {
-  // // constructor(props){
-  //   super(props)
-  // };
 
-  handleMouseOver(index) {
-    // console.log('ok')// Cambia el estado para indicar que el mouse está sobre el thumb en el índice especificado.
-    //this.setState({ hoveredThumbIndex: index });
-  }
-
-  handleMouseOut() {
-    // this.setState({ isHovered: true })
-    // Cuando el mouse sale de cualquier thumb, restaura el estado para indicar que no hay ningún thumb con el mouse sobre él.
-    //this.setState({ hoveredThumbIndex: null });
-  }
 
   render() {
-    debugger
+    
     const { imagen, titulo, options, alt } = this.props;
    
 
     const listItems = Object.entries(options).map(([text, value]) => (
-      <div className='container'>
-        <div className='row'>
-          <div className='col'>
-            <a href={value.url} className="list-group-item list-group-item-action card-body">
+      <div className='container '>
+        <div className='row '>
+          <div className='col borderKing'>
+            <a href={value.url} className="list-group-item list-group-item-action card-body ">
               <i >
                 {text}
 
@@ -41,7 +28,8 @@ class ImageCard extends Component {
           </div>
 
           <div className='col-1'>
-            <a href={value.url} ><img src={value.icono} className="iconos" alt='icono' /></a>
+
+            <a href={value.url} ><img src={value.icono} style={{ backgroundColor: value.color, border: "3px solid black" }} className="iconos" alt='icono' /></a>
           </div>
 
         </div>
@@ -76,9 +64,9 @@ class ImageCard extends Component {
           <div className='col-2'>
           </div>
 
-          <div className='col-4'>
+          <div className='col-4 '>
 
-            <ul class="list-group" >
+            <ul class="list-group " >
 
               {listItems}
 

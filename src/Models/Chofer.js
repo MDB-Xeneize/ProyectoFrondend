@@ -1,6 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import RegistroChofer from '../RegistroChofer';
+import NavOptions from '../navOptions';
 
 function Chofer(){
     
@@ -8,6 +9,7 @@ function Chofer(){
         <>
         <BarraNav/>
         <RegistroChofer/>
+        <NavOptions opcion='option3'/>
         </>
     )
     

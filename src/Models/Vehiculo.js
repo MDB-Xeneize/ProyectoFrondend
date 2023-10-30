@@ -1,6 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import RegistroVehiculo from '../RegistroVehiculo';
+import NavOptions from '../navOptions';
 
 function Vehículo(){
     
@@ -8,6 +9,7 @@ function Vehículo(){
         <>
         <BarraNav/>
         <RegistroVehiculo/>
+        <NavOptions opcion='option2'/>
         </>
     )
     

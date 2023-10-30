@@ -29,7 +29,7 @@ class LogeoClass extends React.Component {
                 'Content-Type': 'application/json',
             }
         }
-        debugger
+        
         fetch("http://localhost:8080/api/security/login", parametros)
             .then(res => {
                 return res.json()
@@ -43,7 +43,7 @@ class LogeoClass extends React.Component {
                     })
             }).then(
                 result => {
-                    debugger
+                    
                     if (result.ok) {
                         sessionStorage.setItem('token', result.body.token)
                         var tokenDecoded = jwt_decode(result.body.token)
@@ -64,14 +64,8 @@ class LogeoClass extends React.Component {
                             theme: "light",
                         });
 
-                        // var tokenDecoded = jwt_decode(result.body.token);
-
-                        // if (tokenDecoded.rol === "Agente") {
-                        //     this.props.navigate("/reservas")
-                        // } else {
-                        debugger
+                        
                         this.props.navigate("/Menu")
-                        // }
 
                     } else {
                         toast.error(result.body.message, {
@@ -109,7 +103,7 @@ class LogeoClass extends React.Component {
 
     render() {
     return (
-        <div className="container">
+        <div className="container bottom">
 
         <div className="row">
             <div className="col-3">

@@ -1,7 +1,7 @@
 import React from 'react';
 import BarraNav from '../nav';
 import RegistroVehiculo from '../RegistroVehiculo';
-
+import NavOptions from '../navOptions';
 
 function VehiculoBorrar(){
     
@@ -9,6 +9,7 @@ function VehiculoBorrar(){
         <>
         <BarraNav/>
         <RegistroVehiculo borrar={true} />
+        <NavOptions opcion='option2'/>
         </>
     )
     

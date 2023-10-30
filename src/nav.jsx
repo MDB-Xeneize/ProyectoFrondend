@@ -1,6 +1,6 @@
 import React from 'react';
 import {  useParams,useNavigate } from 'react-router-dom';
-import SeparateWays from './AgregarSeparate';
+
 
 class BarraNavClass extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class BarraNavClass extends React.Component {
         };
       }
     componentDidMount() {
-        debugger
+        
         const tokenG = sessionStorage.getItem('token');
         if (tokenG !== this.state.token) {
           this.setState({ token: tokenG });
@@ -18,11 +18,11 @@ class BarraNavClass extends React.Component {
       }
 
     handleClickSalir = () => {
-        debugger
+    
         sessionStorage.removeItem('token');
         this.setState({ token: '' });
         this.props.useNavigateEnvuelto('/'); 
-        //navigate('/')
+        
 
     }
 
@@ -61,7 +61,9 @@ class BarraNavClass extends React.Component {
             </div>
 
         </div>
-        <SeparateWays/>
+        <div className='row separate'>
+
+        </div>
         </>
     );
 }
@@ -71,7 +73,7 @@ class BarraNavClass extends React.Component {
 export default BarraNav;
 
 export function BarraNav() {
-    debugger
+    
     const parametros = useParams();
     const useNavigateP = useNavigate();
     
